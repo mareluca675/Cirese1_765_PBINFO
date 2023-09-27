@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long v[1001], n, k, i, pointer1 = 1, pointer2 = 1;
+
+int main()
+{
+    ifstream fin("sumainsecv.in");
+    ofstream fout("sumainsecv.out");
+    
+    fin >> n >> k;
+    for(i = 1; i <= n; i++)
+    {
+        fin >> v[i];
+        v[i] = v[i] + v[i - 1];
+    }
+    
+    while(pointer1 <= n)
+    {
+        if(v[pointer2] - v[pointer1 - 1] < k)
+        {
+            pointer2++;
+        }
+        else if(v[pointer2] - v[pointer1 - 1] > k)
+        {
+            pointer1++;
+        }
+        else
+        {
+            fout << pointer1 << " " << pointer2;
+            break;
+        }
+    }
+    
+    if(pointer1 == n)
+    {
+        fout << 0 << " " << 0;
+    }
+}
